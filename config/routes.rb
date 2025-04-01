@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     resources :products
   end
 
+  resources :products do
+    resources :variants, only: [ :new, :create, :edit, :update, :destroy ], module: :admin
+  end
+
+
   # Static Pages
   root "static_pages#home"
   get "/about", to: "static_pages#about"
