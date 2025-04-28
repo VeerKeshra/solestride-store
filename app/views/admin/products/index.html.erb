@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h1>🛍️ Product Management</h1>
+
+  <%= link_to "➕ Add Product", new_admin_product_path, class: "btn btn-success mb-3" %>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.category %></td>
+          <td>$<%= number_to_currency(product.price, unit: "") %></td>
+          <td><%= link_to "✏️ Edit", edit_admin_product_path(product), class: "btn btn-warning btn-sm" %></td>
+          <td>
+            <%= link_to "🗑 Delete", admin_product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

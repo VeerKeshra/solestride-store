@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get "products/index"
+    get "products/new"
+    get "products/create"
+    get "products/edit"
+    get "products/update"
+    get "products/destroy"
+  end
+
+  namespace :admin do
+    resources :products
+  end
+
+  resources :products do
+    resources :variants, only: [ :new, :create, :edit, :update, :destroy ], module: :admin
+  end
+
+
   # Static Pages
   root "static_pages#home"
   get "/about", to: "static_pages#about"
